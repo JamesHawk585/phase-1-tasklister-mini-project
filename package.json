@@ -28,5 +28,8 @@
     "jsdom": "^9.0",
     "mocha": "5.2.0",
     "mocha-jsdom": "~1.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0-alpha.6"
   }
 }
