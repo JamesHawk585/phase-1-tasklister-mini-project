@@ -6,21 +6,33 @@ document.addEventListener("DOMContentLoaded", () => {
   addingEventListeners() 
 });
 
+let taskObjArr = []
+
+
 // The addingEventListeners() function adds an event listener to the "submit" event of a form element in the HTML document with the ID "create-task-form". When the form is submitted, the handleFormSubmit() function is called to handle the form data and display the task on the page.
 
 function addingEventListeners() {
   document
     .getElementById("create-task-form")
     .addEventListener("submit", handleFormSubmit)
+    document.getElementById("sort-tasks").addEventListener("change", sortTasks)
 }
 
 // The handleFormSubmit() function prevents the default form submission behavior and retrieves the task and priority level entered by the user. It then calls the displayTask() function, which creates a new task list item and adds it to the taskUl unordered list.
 
 function handleFormSubmit(e) {
   e.preventDefault()
+  console.log(e)
   const task = e.target[0].value
   const priorityLevel = parseInt(e.target.priority.value)
-  displayTask(task, priorityLevel)
+  
+  const taskObj = {task, priorityLevel}
+  taskObjArr.push(taskObj)
+
+  console.log(taskObjArr)
+
+  sortTasks()
+  // displayTask(task, priorityLevel)
 }
 
 // The displayTask() function creates a new task list item and adds it to the task list in the HTML document
@@ -62,3 +74,15 @@ function getPriorityColor(priorityLevel) {
 }
 
 
+function sortTasks() {
+  console.log("in sortTasks")
+  const sortTasksSelect = document.getElementById("sort-tasks")
+  if (sortTasksSelect.value === "h-l") {
+    taskObjArr.sort((a, b) => a.priorityLevel - b.priorityLevel)
+  } else {
+    taskObjArr.sort((a, b) => b.priorityLevel - a.priorityLevel)
+  }
+  console.log(taskObjArr)
+  // displayTasks()
+
+}
